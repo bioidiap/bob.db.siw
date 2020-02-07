@@ -1,89 +1,110 @@
-#!/usr/bin/env python
-# vim: set fileencoding=utf-8 :
-
 """Test Units
 """
 from bob.db.siw.config import database as db
+from bob.db.siw import SIW_FRAME_SHAPE
 import nose
 
 
 def assert_nfiles(files, total, nbonafide, nattack):
     len_files = len(files)
-    assert len_files == total, len_files
+    assert len_files == total, (len_files, total)
     len_bonafide = len([f for f in files if f.attack_type is None])
     len_attack = len_files - len_bonafide
-    assert len_bonafide == nbonafide, len_bonafide
-    assert len_attack == nattack, len_attack
+    assert len_bonafide == nbonafide, (len_bonafide, nbonafide)
+    assert len_attack == nattack, (len_attack, nattack)
 
 
 def test_database():
-    protocol = 'Protocol_1'
+    # 80 identities in train
+    # 10 identities in dev
+    # 75 identities in eval
+    # 8 BF recordings (2 sensor * 2 medium * 2 session)
+    # 2 Print attacks (2 mediums)
+    # 16 Replay attacks (2 sensor * 4 medium * 2 session)
+
+    protocol = "Protocol_1"
     db.protocol = protocol
     assert len(db.all_files()[0])
     assert len(db.all_files()[1])
-    assert_nfiles(db.objects(protocol=protocol), 1200 + 900 + 600,
-                  240 + 180 + 120, 960 + 720 + 480)
-    assert_nfiles(db.objects(protocol=protocol,
-                             groups='train'), 1200, 240, 960)
-    assert_nfiles(db.objects(protocol=protocol, groups='dev'), 900, 180, 720)
-    assert_nfiles(db.objects(protocol=protocol, groups='eval'), 600, 120, 480)
+    assert_nfiles(db.objects(protocol=protocol), 4478, 1313, 3165)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 2141, 636, 1505)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 276, 78, 198)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 2061, 599, 1462)
 
-    protocol = 'Protocol_2'
+    protocol = "Protocol_2_1"
     db.protocol = protocol
-    assert_nfiles(db.objects(protocol=protocol), 1080 * 2 + 810,
-                  360 + 270 + 360, 720 + 540 + 720)
-    assert_nfiles(db.objects(protocol=protocol,
-                             groups='train'), 1080, 360, 720)
-    assert_nfiles(db.objects(protocol=protocol,
-                             groups='dev'), 810, 270, 540)
-    assert_nfiles(db.objects(protocol=protocol,
-                             groups='eval'), 1080, 360, 720)
+    assert_nfiles(db.objects(protocol=protocol), 1520 + 198 + 899, 636 + 78 + 599, 1304)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1520, 636, 884)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 899, 599, 300)
 
-    for i in range(1, 7):
-        protocol = 'Protocol_3_{}'.format(i)
-        db.protocol = protocol
-        assert_nfiles(db.objects(protocol=protocol), 1500 + 1125 + 300,
-                      300 + 225 + 60, 1200 + 900 + 240)
-        assert_nfiles(db.objects(protocol=protocol,
-                                 groups='train'), 1500, 300, 1200)
-        assert_nfiles(db.objects(protocol=protocol,
-                                 groups='dev'), 1125, 225, 900)
-        assert_nfiles(db.objects(protocol=protocol,
-                                 groups='eval'), 300, 60, 240)
+    protocol = "Protocol_2_2"
+    db.protocol = protocol
+    assert_nfiles(db.objects(protocol=protocol), 1520 + 198 + 899, 636 + 78 + 599, 1304)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1520, 636, 884)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 899, 599, 300)
 
-        protocol = 'Protocol_4_{}'.format(i)
-        db.protocol = protocol
-        assert_nfiles(db.objects(protocol=protocol), 600 + 450 + 60,
-                      200 + 150 + 20, 400 + 300 + 40)
-        assert_nfiles(db.objects(protocol=protocol,
-                                 groups='train'), 600, 200, 400)
-        assert_nfiles(db.objects(protocol=protocol,
-                                 groups='dev'), 450, 150, 300)
-        assert_nfiles(db.objects(protocol=protocol,
-                                 groups='eval'), 60, 20, 40)
+    protocol = "Protocol_2_3"
+    db.protocol = protocol
+    assert_nfiles(db.objects(protocol=protocol), 2616, 636 + 78 + 599, 1303)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1521, 636, 885)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 897, 599, 298)
+
+    protocol = "Protocol_2_4"
+    db.protocol = protocol
+    assert_nfiles(
+        db.objects(protocol=protocol), 1595 + 198 + 849, 636 + 78 + 599, 959 + 120 + 250
+    )
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1595, 636, 959)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 849, 599, 250)
+
+    protocol = "Protocol_3_1"
+    protocol = protocol
+
+    assert_nfiles(db.objects(protocol=protocol), 2800, 1313, 1487)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 937, 636, 301)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 116, 78, 38)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 1747, 599, 1148)
+
+    protocol = "Protocol_3_2"
+    protocol = protocol
+
+    assert_nfiles(db.objects(protocol=protocol), 2991, 1313, 1678)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1840, 636, 1204)
+    assert_nfiles(db.objects(protocol=protocol, groups="dev"), 238, 78, 160)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 913, 599, 314)
 
 
 def test_frames():
-    protocol = 'Protocol_1'
+    protocol = "Protocol_1"
     db.protocol = protocol
     if db.original_directory is None:
         raise nose.SkipTest(
             "Please configure bob.db.siw (refer to package documentation) "
             "to point to the directory where the database's raw data are. This"
-            " way we can test more features of the database interface.")
+            " way we can test more features of the database interface."
+        )
     padfile = db.all_files()[0][0]
-    assert db.number_of_frames(padfile) == 151, db.number_of_frames(padfile)
+    assert padfile.number_of_frames == 599, padfile.number_of_frames
+    for i, frame in enumerate(padfile.frames):
+        pass
+    assert i == 598, i
+    assert frame.shape == SIW_FRAME_SHAPE, frame.shape
 
 
 def test_annotations():
-    protocol = 'Protocol_1'
+    protocol = "Protocol_1"
     db.protocol = protocol
     if db.original_directory is None:
         raise nose.SkipTest(
             "Please configure bob.db.siw (refer to package documentation) "
             "to point to the directory where the database's raw data are. This"
-            " way we can test more features of the database interface.")
+            " way we can test more features of the database interface."
+        )
     padfile = db.all_files()[0][0]
-    annot = padfile.annotations['0']
+    annot = padfile.annotations["0"]
     # leye x must be higher than reye x to conform to Bob format
-    assert annot['leye'][1] > annot['reye'][1], annot
+    assert annot["leye"][1] > annot["reye"][1], annot

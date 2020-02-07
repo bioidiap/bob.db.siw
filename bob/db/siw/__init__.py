@@ -1,4 +1,4 @@
-SIW_FRAME_SHAPE = (3, 1920, 1080)
+SIW_FRAME_SHAPE = (3, 1080, 1920)
 "Shape of the video frames in the siw database."
 
 from .query import Database, File

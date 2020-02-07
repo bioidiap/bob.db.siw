@@ -115,7 +115,7 @@ def create(args):
     pa = ".*/spoof/.*"
     out_folder = os.path.join(root, "Protocol_1")
     files_map = {
-        "train": ([p + ":60" for p in files["train"]], bf, pa),
+        "train": ([p + "_60" for p in files["train"]], bf, pa),
         "dev": (files["dev"], bf, pa),
         "eval": (files["eval"], bf, pa),
     }
