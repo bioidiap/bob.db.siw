@@ -8,7 +8,7 @@ def siw_file_metadata(path):
     (or *.mp4). SubjectID ranges from 001 to 165. SensorID represents the capture
     device. TypeID represents the spoof type of the video. MediumID and SessionID record
     additional details of the video, shown in the Figure 2
-    (http://cvlab.cse.msu.edu/spoof-in-the-wild-siw-face-anti-spoofing-database.html)
+    (http://cvlab.cse.msu.edu/siw-spoof-in-the-wild-database.html)
 
     Parameters
     ----------

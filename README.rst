@@ -55,4 +55,4 @@ development `mailing list`_.
 .. _bob: https://www.idiap.ch/software/bob
 .. _installation: https://www.idiap.ch/software/bob/install
 .. _mailing list: https://www.idiap.ch/software/bob/discuss
-.. _SIW: http://cvlab.cse.msu.edu/spoof-in-the-wild-siw-face-anti-spoofing-database.html
+.. _SIW: http://cvlab.cse.msu.edu/siw-spoof-in-the-wild-database.html

@@ -28,5 +28,5 @@ Package Documentation
 ---------------------
 
 .. automodule:: bob.db.siw
-.. _SIW: http://cvlab.cse.msu.edu/spoof-in-the-wild-siw-face-anti-spoofing-database.html
+.. _SIW: http://cvlab.cse.msu.edu/siw-spoof-in-the-wild-database.html
 
