@@ -86,6 +86,7 @@ class File(VideoPadFile):
             The annotations as a dictionary, e.g.:
             ``{'0': {'reye':(re_y,re_x), 'leye':(le_y,le_x)}, ...}``
         """
+        assert self.annotation_directory, 'Please see package documentation for annotations'
         path = self.make_path(self.annotation_directory, extension=".json")
         return read_annotation_file(path, annotation_type="json")
 

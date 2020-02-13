@@ -7,9 +7,16 @@ import nose
 
 def assert_nfiles(files, total, nbonafide, nattack):
     len_files = len(files)
-    assert len_files == total, (len_files, total)
     len_bonafide = len([f for f in files if f.attack_type is None])
     len_attack = len_files - len_bonafide
+    assert len_files == total, (
+        len_files,
+        len_bonafide,
+        len_attack,
+        total,
+        nbonafide,
+        nattack,
+    )
     assert len_bonafide == nbonafide, (len_bonafide, nbonafide)
     assert len_attack == nattack, (len_attack, nattack)
 
@@ -26,54 +33,54 @@ def test_database():
     db.protocol = protocol
     assert len(db.all_files()[0])
     assert len(db.all_files()[1])
-    assert_nfiles(db.objects(protocol=protocol), 4478, 1313, 3165)
-    assert_nfiles(db.objects(protocol=protocol, groups="train"), 2141, 636, 1505)
+    assert_nfiles(db.objects(protocol=protocol), 4469, 1313, 3156)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 2140, 636, 1504)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 276, 78, 198)
-    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 2061, 599, 1462)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 2053, 599, 1454)
 
     protocol = "Protocol_2_1"
     db.protocol = protocol
-    assert_nfiles(db.objects(protocol=protocol), 1520 + 198 + 899, 636 + 78 + 599, 1304)
-    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1520, 636, 884)
+    assert_nfiles(db.objects(protocol=protocol), 2616, 636 + 78 + 599, 1303)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1519, 636, 883)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
     assert_nfiles(db.objects(protocol=protocol, groups="eval"), 899, 599, 300)
 
     protocol = "Protocol_2_2"
     db.protocol = protocol
-    assert_nfiles(db.objects(protocol=protocol), 1520 + 198 + 899, 636 + 78 + 599, 1304)
-    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1520, 636, 884)
+    assert_nfiles(db.objects(protocol=protocol), 2612, 636 + 78 + 599, 1299)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1519, 636, 883)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
-    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 899, 599, 300)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 895, 599, 296)
 
     protocol = "Protocol_2_3"
     db.protocol = protocol
-    assert_nfiles(db.objects(protocol=protocol), 2616, 636 + 78 + 599, 1303)
+    assert_nfiles(db.objects(protocol=protocol), 2612, 636 + 78 + 599, 1299)
     assert_nfiles(db.objects(protocol=protocol, groups="train"), 1521, 636, 885)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
-    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 897, 599, 298)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 893, 599, 294)
 
     protocol = "Protocol_2_4"
     db.protocol = protocol
     assert_nfiles(
-        db.objects(protocol=protocol), 1595 + 198 + 849, 636 + 78 + 599, 959 + 120 + 250
+        db.objects(protocol=protocol), 1595 + 198 + 848, 636 + 78 + 599, 959 + 120 + 249
     )
-    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1595, 636, 959)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1594, 636, 958)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 198, 78, 120)
     assert_nfiles(db.objects(protocol=protocol, groups="eval"), 849, 599, 250)
 
     protocol = "Protocol_3_1"
     protocol = protocol
 
-    assert_nfiles(db.objects(protocol=protocol), 2800, 1313, 1487)
+    assert_nfiles(db.objects(protocol=protocol), 2792, 1313, 1479)
     assert_nfiles(db.objects(protocol=protocol, groups="train"), 937, 636, 301)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 116, 78, 38)
-    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 1747, 599, 1148)
+    assert_nfiles(db.objects(protocol=protocol, groups="eval"), 1739, 599, 1140)
 
     protocol = "Protocol_3_2"
     protocol = protocol
 
-    assert_nfiles(db.objects(protocol=protocol), 2991, 1313, 1678)
-    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1840, 636, 1204)
+    assert_nfiles(db.objects(protocol=protocol), 2990, 1313, 1677)
+    assert_nfiles(db.objects(protocol=protocol, groups="train"), 1839, 636, 1203)
     assert_nfiles(db.objects(protocol=protocol, groups="dev"), 238, 78, 160)
     assert_nfiles(db.objects(protocol=protocol, groups="eval"), 913, 599, 314)
 

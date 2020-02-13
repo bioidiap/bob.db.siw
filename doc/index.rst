@@ -13,6 +13,15 @@ dataset, you need to configure bob.db.siw to find the dataset::
 
     $ bob config set bob.db.siw.directory /path/to/downloaded/dataset
 
+Also, we provide our own annotations for this dataset because the ones provided with the
+dataset are not good. Download the annotations from
+:download:`here <siw-mtcnn-v1-annotations.tar.xz>` and extract them into a folder of
+your choice. Then, configure the database interface to find the extracted annotations
+using the following command::
+
+    $ bob config set bob.db.siw.annotation_dir /path/to/extracted/annotations
+
+
 If you use this database, please cite the following publication::
 
     @inproceedings{learning-deep-models-for-face-anti-spoofing-binary-or-auxiliary-supervision,
