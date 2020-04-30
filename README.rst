@@ -1,18 +1,14 @@
 .. vim: set fileencoding=utf-8 :
 .. Tue Nov  7 16:30:33 CET 2017
 
-.. image:: https://img.shields.io/badge/docs-stable-yellow.svg
-   :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.siw/stable/index.html
-.. image:: https://img.shields.io/badge/docs-latest-orange.svg
+.. image:: https://img.shields.io/badge/docs-available-orage.svg
    :target: https://www.idiap.ch/software/bob/docs/bob/bob.db.siw/master/index.html
-.. image:: https://gitlab.idiap.ch/bob/bob.db.siw/badges/master/build.svg
+.. image:: https://gitlab.idiap.ch/bob/bob.db.siw/badges/master/pipeline.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.siw/commits/master
 .. image:: https://gitlab.idiap.ch/bob/bob.db.siw/badges/master/coverage.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.siw/commits/master
 .. image:: https://img.shields.io/badge/gitlab-project-0000c0.svg
    :target: https://gitlab.idiap.ch/bob/bob.db.siw
-.. image:: https://img.shields.io/pypi/v/bob.db.siw.svg
-   :target: https://pypi.python.org/pypi/bob.db.siw
 
 
 =================================
